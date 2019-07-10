@@ -1,3 +1,5 @@
 *.*~
 *.o
 emulator
+play.c
+play

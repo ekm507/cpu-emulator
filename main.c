@@ -46,8 +46,8 @@ int main(int argc, char** argv)
 	codefile = fopen(filename, "r");
 
 	//the code will be stored here
-	char *code;
-	code = malloc(size * sizeof(char));
+	short int *code;
+	code = malloc(size * sizeof(short int));
 
 	unsigned long int i = 0;
 
@@ -57,12 +57,15 @@ int main(int argc, char** argv)
 
 	//close the code file
 	fclose(codefile);
+	
+	//size of the dynamic memory
+	long int ram_size = 4096;
+	
+	initialize_emulator(ram_size);
 
 	//start emulation
 	int status = -1;
 	status = emulate(code, i);
-
-	
 	
 	return 0;
 }

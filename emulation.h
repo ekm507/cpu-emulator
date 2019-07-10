@@ -1,5 +1,10 @@
-#ifndef EMULATOR_H
-#define EMULATOR_H
+#ifndef EMULATOPN_H
+#define EMULATION_H
 
+//start emulation
 int emulate(char* code, long int codesize);
-#endif//EMULATOR_H
+
+//initialize emulator
+int initialize_emulator(long int size);
+
+#endif//EMULATION_H

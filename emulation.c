@@ -1,31 +1,43 @@
 
-#include "emulator.h"
+#include "emulation.h"
 
 #include <stdlib.h>
 
-char* ram;
+//dynamic memory for storing variables
+short int* ram;
 long int ram_size = 0;
-int start(long int size)
+
+//register memory
+const int reg_size = 8;
+short int reg[reg_size];
+
+
+//initialize the emulator
+int initialize_emulator(long int size)
 {
 	ram_size = size;
-	ram = (char*) malloc(ram_size * sizeof(char));
+	ram = (short int*) malloc(ram_size * sizeof(short int));
 	return 0;
 }
 
+
+//start emulation
 int emulate(char* code, long int code_size)
 {
-	char argument;
-	char instruction;
-	for(int ic = 0/*instruction counter*/; ic < code_size; ic++)
-	{
-		instruction = code[ic];
-		/*
-		if(argumented(instruction))
-		{
-			argument = ++ic;
-		}
-		*/
+	short int argument;
+	short int instruction;
 	
+	//hh = first 4 bits of instruction
+	char hh = (instruction & 0xf000) >> 12;
+	
+	for(int pc = 0/*instruction counter*/; pc < code_size; pc++)
+	{
+		instruction = code[pc];
+		
+		
+		
+		if(hh == 0x7 || hh == 0xf)
+		
 	}
 	
 	
