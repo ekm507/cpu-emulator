@@ -90,12 +90,15 @@ int emulate(short int* code, long int code_size)
 					
 				//INC
 				case 0x7020:
-				
+					//increase AC register by 1.
+					reg.AC++;	
 					break;
 					
 				//SPA
 				case 0x7010:
-				
+					//pass next instruction if AC register > 0
+					if(reg.AC > 0)
+						reg.PC++;
 					break;
 					
 				//SNA
@@ -115,7 +118,8 @@ int emulate(short int* code, long int code_size)
 			
 				//HLT
 				case 0x7001:
-				
+					//halt the computer
+					return 0;
 					break;
 			
 			}
@@ -128,3 +132,5 @@ int emulate(short int* code, long int code_size)
 	
 	return 0;
 }
+
+
