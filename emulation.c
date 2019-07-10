@@ -108,6 +108,9 @@ int emulate(short int* code, long int code_size)
 			
 				//SZA
 				case 0x7004:
+					//pass next instruction if AC register is 0.
+					if(reg.AC == 0)
+						reg.PC++;
 				
 					break;
 			
@@ -125,6 +128,9 @@ int emulate(short int* code, long int code_size)
 			}
 		
 		}
+		
+		//wait for each clock to let emulation look real
+		//TODO
 		
 	}
 	
