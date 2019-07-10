@@ -10,5 +10,5 @@ emulator.o: emulation.c emulation.h
 clean:
 	rm *.o emulator
 	
-play:
+play: play.c
 	gcc play.c -o play

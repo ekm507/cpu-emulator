@@ -2,6 +2,7 @@
 #include "emulation.h"
 
 #include <stdlib.h>
+#include <stdio.h>
 
 //dynamic memory for storing variables
 short int* ram;
@@ -25,6 +26,9 @@ struct register_struct
 
 }reg;
 
+int get_integer();
+
+void print_integer(int number);
 
 //initialize the emulator
 int initialize_emulator(long int size)
@@ -36,10 +40,9 @@ int initialize_emulator(long int size)
 
 
 //start emulation
-int emulate(short int* code, long int code_size)
+int emulate(int* code, long int code_size)
 {
-	short int argument;
-	short int instruction;
+	int instruction;
 	
 	//hh = first 4 bits of instruction
 	char hh = (instruction & 0xf000) >> 12;
@@ -124,7 +127,40 @@ int emulate(short int* code, long int code_size)
 					//halt the computer
 					return 0;
 					break;
+					
+				//INP
+				case 0xf800:
+					//get a number and insert to AC register
+					reg.AC = get_integer();
+					break;
+					
+				//OUT
+				case 0xf400:
+					//print out what is inside AC
+					print_integer(reg.AC);
+					break;
+					
+				//SKI
+				case 0xf200:
+				
+					break;
 			
+				//SKO
+				case 0xf100:
+				
+					break;
+					
+				//ION
+				case 0xf80:
+				
+					break;
+				
+				//IOF
+				case 0xf40:
+				
+					break;
+					
+					
 			}
 		
 		}
@@ -139,4 +175,19 @@ int emulate(short int* code, long int code_size)
 	return 0;
 }
 
+//-----------------------------------------------------------------------------
+
+int get_integer()
+{
+	int number;
+	scanf("%d", &number);
+	return number;
+}
+
+//-----------------------------------------------------------------------------
+
+void print_integer(int number)
+{
+	printf("%d\n", number);
+}
 
