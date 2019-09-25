@@ -175,8 +175,10 @@ int emulate(int* code, long int code_size)
 			//AND
 			//I = 0
 			case 0x0:
+				reg.AC &= value;
 			//I = 1
 			case 0x8:
+				reg.AC &= ram[ram[value]]; //is it right?! TODO
 				break;
 
 			//ADD
