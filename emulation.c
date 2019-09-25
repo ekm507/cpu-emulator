@@ -106,7 +106,9 @@ int emulate(int* code, long int code_size)
 					
 				//SNA
 				case 0x7008:
-				
+					//pass next instruction if AC register < 0
+					if(reg.AC < 0)
+						reg.PC++;
 					break;
 			
 				//SZA
@@ -164,6 +166,69 @@ int emulate(int* code, long int code_size)
 			}
 		
 		}
+		else
+		{
+			short int value = instruction & 0x0FFF;
+			switch (hh)
+			{
+
+			//AND
+			//I = 0
+			case 0x0:
+			//I = 1
+			case 0x8:
+				break;
+
+			//ADD
+			//I = 0
+			case 0x1:
+			//I = 1
+			case 0x9:
+				break;
+			
+			//LDA
+			//I = 0
+			case 0x2:
+			//I = 1
+			case 0xA:
+				break;
+			
+
+			//STA
+			//I = 0
+			case 0x3:
+			//I = 1
+			case 0xB:
+				break;
+
+			//BUN
+			//I = 0
+			case 0x4:
+			//I = 1
+			case 0xC:
+				break;
+
+			//BSA
+			//I = 0
+			case 0x5:
+			//I = 1
+			case 0xD:
+				break;
+
+			//ISZ
+			//I = 0
+			case 0x6:
+			//I = 1
+			case 0xE:
+				break;
+
+			
+			
+			default:
+				break;
+			}
+		}
+		
 		
 		//wait for each clock to let emulation look real
 		//TODO
