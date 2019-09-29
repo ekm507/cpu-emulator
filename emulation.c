@@ -26,6 +26,12 @@ struct register_struct
 
 }reg;
 
+struct flag_struct
+{
+	union
+}flag;
+
+
 int get_integer();
 
 void print_integer(int number);
@@ -47,10 +53,12 @@ int emulate(int* code, long int code_size)
 	//hh = first 4 bits of instruction
 	char hh = (instruction & 0xf000) >> 12;
 	
-	for(reg.PC = 0/*instruction counter*/; reg.PC < code_size; reg.PC++)
+	for(reg.PC = 0/*program counter*/; reg.PC < code_size; reg.PC++)
 	{
 		instruction = code[reg.PC];
 		
+		//instruction code is stored in IR register
+		reg.IR = instruction;
 		
 		//see if instruction does not have arguments.
 		if(hh == 0x7 || hh == 0xf)
@@ -132,16 +140,18 @@ int emulate(int* code, long int code_size)
 					
 				//INP
 				case 0xf800:
-					//get a number and insert to AC register
-					reg.AC = get_integer();
+					//get a number and insert to INPR register
+					//input character is stored in INPR register.
+					reg.INPR = get_integer();
 					break;
 					
 				//OUT
 				case 0xf400:
-					//print out what is inside AC
-					print_integer(reg.AC);
+					//print out what is inside OUTR
+					//output character is stored in OUTR register.
+					print_integer(reg.OUTR);
 					break;
-					
+					/////////////////////////
 				//SKI
 				case 0xf200:
 				
