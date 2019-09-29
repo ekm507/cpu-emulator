@@ -26,9 +26,17 @@ struct register_struct
 
 }reg;
 
-struct flag_struct
+union flag_struct
 {
-	union
+	unsigned char byte;
+	struct 
+	{
+		unsigned char E : 1;
+		unsigned char INPUT : 1;
+		unsigned char OUTPUT : 1;
+		unsigned char REST : 5;
+	};
+	
 }flag;
 
 
